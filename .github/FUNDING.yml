@@ -12,6 +12,4 @@ lfx_crowdfunding:
 polar:
 buy_me_a_coffee:
 thanks_dev:
-custom:
-  - url: "https://www.paypal.com/paypalme/iamsanmith"
-    name: "PayPal"
+custom: [upier.vercel.app/pay/sanmith@superyes]
