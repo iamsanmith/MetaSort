@@ -4,8 +4,10 @@
 &nbsp;
 ![Linux](https://img.shields.io/badge/Linux-blue?style=flat-square&logo=linux&logoColor=white)
 &nbsp;
+
 [![Donate via UPI](https://img.shields.io/badge/Donate-UPI-blue?logo=googlepay&style=for-the-badge)](https://upier.vercel.app/pay/sanmith@superyes)
-[![Donate via PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg?logo=paypal)](https://www.paypal.com/paypalme/iamsanmith)
+[![Donate via PayPal](https://img.shields.io/badge/Donate-PayPal-blue?logo=paypal&style=for-the-badge)](https://www.paypal.com/paypalme/iamsanmith)
+[![Donate via Ko-fi](https://img.shields.io/badge/Donate-Ko--fi-blue?logo=kofi&style=for-the-badge)](https://ko-fi.com/L3L01JGIUW)
 
 
 <div align="center">
@@ -63,20 +65,46 @@ cargo run --release
 ## 💙 Support & Donations
 
 <div align="center">
-  <img src="assets/upi.png" alt="UPI QR Code" width="200"/>
-  <br/>
-  <a href="https://upier.vercel.app/pay/sanmith@superyes">
-    <strong>💙 Donate via UPI</strong>
+
+  <!-- UPI Donation -->
+  <a href="https://upier.vercel.app/pay/sanmith@superyes" target="_blank">
+    <img 
+      src="https://img.shields.io/badge/Donate%20via-UPI-green?style=for-the-badge&logo=google-pay" 
+      alt="Donate via UPI"
+    />
   </a>
   <br/><br/>
-  
-  <a href="https://www.paypal.com/paypalme/iamsanmith">
-    <img src="https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png" alt="Donate with PayPal" width="200"/>
+
+  <!-- PayPal Donation -->
+  <a href="https://www.paypal.com/paypalme/iamsanmith" target="_blank">
+    <img 
+      src="https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png" 
+      alt="Donate with PayPal" 
+      width="200"
+    />
   </a>
-  
-  <br/>
-  <em>If MetaSort saved you hours, please consider supporting the project! Every contribution, no matter how small, makes a difference and helps keep MetaSort free and actively maintained.</em>
+  <br/><br/>
+
+  <!-- Ko-fi Donation -->
+  <a href="https://ko-fi.com/L3L01JGIUW" target="_blank">
+    <img 
+      height="36" 
+      style="border:0px;height:36px;" 
+      src="https://storage.ko-fi.com/cdn/kofi6.png?v=6" 
+      border="0" 
+      alt="Buy Me a Coffee at ko-fi.com"
+    />
+  </a>
+
+  <br/><br/>
+  <em>
+    If MetaSort saved you hours, please consider supporting the project!  
+    Every contribution, no matter how small, makes a difference and helps keep MetaSort free and actively maintained.
+  </em>
+
 </div>
+
+
 
 ---
 
