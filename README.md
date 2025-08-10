@@ -5,6 +5,8 @@
 ![Linux](https://img.shields.io/badge/Linux-blue?style=flat-square&logo=linux&logoColor=white)
 &nbsp;
 [![Donate via UPI](https://img.shields.io/badge/Donate-UPI-blue?logo=googlepay&style=for-the-badge)](https://upier.vercel.app/pay/sanmith@superyes)
+[![Donate via PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg?logo=paypal)](https://www.paypal.com/paypalme/iamsanmith)
+
 
 <div align="center">
   <img src="assets/logo.png" alt="MetaSort Logo" width="120"/>
@@ -66,6 +68,12 @@ cargo run --release
   <a href="https://upier.vercel.app/pay/sanmith@superyes">
     <strong>💙 Donate via UPI</strong>
   </a>
+  <br/><br/>
+  
+  <a href="https://www.paypal.com/paypalme/iamsanmith">
+    <img src="https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png" alt="Donate with PayPal" width="200"/>
+  </a>
+  
   <br/>
   <em>If MetaSort saved you hours, please consider supporting the project! Every contribution, no matter how small, makes a difference and helps keep MetaSort free and actively maintained.</em>
 </div>
