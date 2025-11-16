@@ -15,6 +15,7 @@ mod ui;
 use std::io;
 use std::path::PathBuf;
 use std::fs;
+use chrono::Local;
 use walkdir;
 use fs_extra;
 use crate::platform::{is_exiftool_available, get_installation_instructions};
@@ -101,7 +102,43 @@ fn main() {
     media_cleaning::clean_json_filenames(temp_dir.to_str().unwrap());
     MetaSortUI::print_success("JSON filename cleaning and pairing complete!");
 
-    // 1b. Ask if WhatsApp/Screenshots should be separated
+    // 1b. Ask if timestamps should be in UTC or system time zone
+    let tz_offset = Local::now().format("%:z").to_string();
+    println!(
+        "\n\
+        ❓ Should timestamps be written in UTC (default) or using your current system time zone offset ({})?\n\
+        \n\
+        Timestamps get written to the DateTimeOriginal EXIF field. By design, this field does not\n\
+        contain a time zone offset, only a date and time in the fixed YYYY:MM:DD HH:MM:SS format\n\
+        (but other fields may contain an offset). Some apps like Apple Photos ignore the offset field\n\
+        and interpret DateTimeOriginal in the local system's time zone offset. So if a photo\n\
+        originally taken at \"2024-05-05 15:00-05:00\" is imported into Apple Photos with\n\
+        a DateTimeOriginal converted to UTC \"2024-05-05 20:00\" (notice no time zone offset) on a\n\
+        system set to a time zone offset of \"-05:00\", the Apple Photos interface will show that\n\
+        the photo was taken at \"2024-05-05 20:00-05:00\" (8 pm in that time zone) instead of\n\
+        \"2024-05-05 15:00-05:00\" (3 pm).\n\
+        \n\
+        Writing the timestamp using the system's time zone offset instead of UTC prevents this shift\n\
+        and preserves the correct displayed time, as long as you are importing into Apple Photos on\n\
+        a system using this same time zone offset of {}.\n\
+        \n\
+        How should timestamps be written?\n\
+            1. UTC (default)\n\
+            2. System time zone offset ({}) (recommended if importing into Apple Photos on a system \
+            set to this same offset)\n",
+        tz_offset, tz_offset, tz_offset
+    );
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).expect("Failed to read line");
+    let use_local_time_zone = matches!(input.trim(), "2");
+
+    if use_local_time_zone {
+        println!("\n✅ Timestamps will be written using the system time zone offset ({}).", tz_offset);
+    } else {
+        println!("\n✅ Timestamps will be written in UTC.");
+    }
+
+    // 1c. Ask if WhatsApp/Screenshots should be separated
     println!("\nDo you want to separate WhatsApp and Screenshot images? (y/n)");
     let mut wa_sc_input = String::new();
     io::stdin().read_line(&mut wa_sc_input).expect("Failed to read line");
@@ -116,7 +153,7 @@ fn main() {
     // 2. Extract metadata from JSON and embed into media files
     MetaSortUI::print_section_header("Metadata Extraction and Embedding");
     MetaSortUI::print_info("Extracting metadata from JSON and embedding into media files...");
-    let (metadata, failed_guess_paths) = metadata_extraction::extract_metadata(temp_dir.to_str().unwrap());
+    let (metadata, failed_guess_paths) = metadata_extraction::extract_metadata(temp_dir.to_str().unwrap(), use_local_time_zone);
     metadata_embed::embed_metadata_all(&metadata, &temp_dir);
     MetaSortUI::print_success("Metadata extraction and embedding complete!");
 

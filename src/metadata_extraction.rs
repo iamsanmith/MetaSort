@@ -2,7 +2,7 @@ use std::fs;
 use std::path::{Path, PathBuf};
 use walkdir::WalkDir;
 use serde_json::Value;
-use chrono::{TimeZone, Utc};
+use chrono::{TimeZone, Utc, Local};
 use crate::utils::log_to_file;
 use std::io;
 use std::io::Write;
@@ -20,7 +20,7 @@ pub struct MediaMetadata {
     pub camera_model: Option<String>,
 }
 
-pub fn extract_metadata(base_path: &str) -> (Vec<MediaMetadata>, Vec<PathBuf>) {
+pub fn extract_metadata(base_path: &str, use_local_time_zone: bool) -> (Vec<MediaMetadata>, Vec<PathBuf>) {
     let mut media_json_pairs: Vec<(PathBuf, PathBuf)> = Vec::new();
     let mut all_media_files: Vec<PathBuf> = Vec::new();
     let media_extensions = vec![
@@ -80,7 +80,12 @@ pub fn extract_metadata(base_path: &str) -> (Vec<MediaMetadata>, Vec<PathBuf>) {
         // Extract timestamp and convert to EXIF format (original date only)
         let exif_date = v["photoTakenTime"]["timestamp"].as_str().and_then(|ts| {
             ts.parse::<i64>().ok().map(|timestamp| {
-                let dt = Utc.timestamp_opt(timestamp, 0).unwrap();
+                let dt_utc = Utc.timestamp_opt(timestamp, 0).unwrap();
+                let dt = if use_local_time_zone {
+                    dt_utc.with_timezone(&Local).naive_local()
+                } else {
+                    dt_utc.naive_utc()
+                };
                 dt.format("%Y:%m:%d %H:%M:%S").to_string()
             })
         });
