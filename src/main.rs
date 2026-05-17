@@ -43,13 +43,13 @@ fn get_folder_size(path: &str) -> u64 {
 }
 
 fn human_readable_size(size: u64) -> String {
-    const KB: u64 = 1024;
-    const MB: u64 = KB * 1024;
-    const GB: u64 = MB * 1024;
+    const KIB: u64 = 1024;
+    const MIB: u64 = KIB * 1024;
+    const GIB: u64 = MIB * 1024;
     match size {
-        s if s >= GB => format!("{:.2} GB", s as f64 / GB as f64),
-        s if s >= MB => format!("{:.2} MB", s as f64 / MB as f64),
-        s if s >= KB => format!("{:.2} KB", s as f64 / KB as f64),
+        s if s >= GIB => format!("{:.2} GiB", s as f64 / GIB as f64),
+        s if s >= MIB => format!("{:.2} MiB", s as f64 / MIB as f64),
+        s if s >= KIB => format!("{:.2} KiB", s as f64 / KIB as f64),
         _ => format!("{} B", size),
     }
 }
